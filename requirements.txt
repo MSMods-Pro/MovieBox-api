@@ -1,6 +1,15 @@
+# MovieBox API – Vercel production dependencies
+# Pin versions tightly to keep the Lambda bundle deterministic
+# and within Vercel's 50 MB unzipped limit.
+
 fastapi==0.110.0
-uvicorn==0.27.1
+uvicorn==0.29.0
 httpx==0.27.0
 beautifulsoup4==4.12.3
 python-multipart==0.0.9
-jinja2==3.1.3
+
+# lxml is a faster HTML parser for BeautifulSoup on serverless.
+# If the Lambda bundle grows too large, remove lxml and
+# keep the default html.parser (no code changes needed –
+# all soup calls already specify "html.parser" explicitly).
+lxml==5.2.1
